@@ -1,0 +1,150 @@
+
+<!doctype html>
+
+<body>
+<header class="side-header light-skin opened-menu">
+
+  <div class="admin-details">
+    <span><img src="../../assets/images/user3.png" alt=""/></span>
+    <h3>{{classCtrl.getCurrentUser().name}}</h3>
+    <i>LEHRER</i>
+    <h5 class="admin-status online">Online</h5>
+  </div>
+
+  <div class="menu-scroll">
+    <div class="side-menus">
+      <span ng-repeat="class in classes">
+      <p><span>IHRE KLASSE: </span></p>
+        <span>{{class.name}}</span>
+        <p></p><p></p>
+       <p> <span>IHRE SCHÜLER:</span></p>
+        <span ng-repeat="student in class.studentList | orderBy:'name'">
+
+        <li><a href="#">{{student.name}}</a></li>
+        </span></span>
+      <nav>
+        <ul ng-repeat="homework in infoboard.homeworkList">
+          <li>
+            <a ui-sref="homework({id: homework._id})" title="">
+              <i class="fa fa-flask"></i>{{homework.title}}
+              <p>Abgabe bis: {{homework.deadline | date: "dd.MM.yyyy"}}</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      </span>
+    </div>
+  </div><!-- Menu Scroll -->
+
+</header>
+
+
+<div class="main-content">
+  <div class="breadcrumbs">
+    <ul>
+
+    </ul>
+  </div>
+
+  <div class="heading-sec">
+    <div class="row">
+      <div class="col-md-4 column">
+        <div class="heading-profile">
+          <h2>Grüezi <span>{{classCtrl.getCurrentUser().name}}</span>, Willkommen zurück.</h2>
+          <span>Seien Sie freundlich und hilfsbereit.</span>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- Top Bar Chart -->
+
+  <div class="panel-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="widget">
+          <div class="widget-controls">
+            <span class="close-content"><i class="fa fa-trash-o"></i></span>
+          </div><!-- Widget Controls -->
+          <div class="welcome-bar">
+            <i class="fa fa-bullhorn orange-skin"></i>
+            <p>Eine neue Aufgabe wurde von Ihrem Schüler <span>Hans</span> gelöst.</p>
+            <span>Schauen Sie sich die Resultate <a href="#" title="">hier</a> an</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="widget">
+          <div class="widget-controls">
+            <span class="refresh-content"><i class="fa fa-refresh"></i></span>
+          </div><!-- Widget Controls -->
+          <div class="server-status-sec">
+            <div class="server-details">
+              <span>Ihre Schüler haben einen durchschnittlichen <a href="#">Leistungsindex</a></span>
+              <h3><span id="number">48%</span></h3>
+              <p>von maximal 100% richtig.</p>
+              <h5>Status : <Span style="color:red">mangelhaft</span></h5>
+              <p></p>
+              <h4>Gelöste Aufgaben</h4>
+                <div ng-repeat="ex in solvedExercises  | filter:{students: '!!'}">
+
+                    <h6>{{ex.title}}</h6>
+                    </div>
+              <a ui-sref="homework-editor" title="" class="sky-skin">Neue Hausaufgabe erstellen</a>
+            </div>
+            <div id="area-chart"></div>
+          </div>
+        </div><!-- Performance -->
+
+      </div>
+      <div class="col-md-4">
+        <div class="widget">
+          <div class="widget-controls">
+            <span class="close-content"><i class="fa fa-trash-o"></i></span>
+            <span class="expand-content"><i class="fa fa-expand"></i></span>
+            <span class="refresh-content"><i class="fa fa-refresh"></i></span>
+          </div>
+          <div class="task-managment">
+            <div class="widget-title">
+              <h3>Aufgaben gelöst von:</h3>
+            </div>
+            <li ng-repeat="stud in successStudents">{{stud.name}}</li>
+          </div><!-- Task Management -->
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="widget">
+          <div class="widget-controls">
+            <span class="close-content"><i class="fa fa-trash-o"></i></span>
+            <span class="expand-content"><i class="fa fa-expand"></i></span>
+            <span class="refresh-content"><i class="fa fa-refresh"></i></span>
+          </div>
+          <div class="task-managment">
+            <div class="widget-title">
+              <h3>Neueste Aktivitäten</h3>
+            </div>
+            <ol id="listitems">
+              <li><i class="sky-skin"></i>Geometrie 1 von Hans erfolgreich abgeschlossen. <b><a href="#" title="">Hier einsehen</a></b> <span class="fa fa-close"></span></li>
+              <li><i class="sky-skin"></i>Algebra 2 von Stephan erfolgreich abgeschlossen. <b><a href="#" title="">Hier einsehen</a></b> <span class="fa fa-close"></span></li>
+              <li><i class="orange-skin"></i>Algebra 1 in Bearbeitung von Vanessa. <span class="fa fa-close"></span></li>
+              <li><i class="sky-skin"></i>Algebra 2 von Lisa erfolgreich abgeschlossen. <b><a href="#" title="">Hier einsehen</a></b> <span class="fa fa-close"></span></li>
+              <li><i class="red-skin"></i>Geometrie 1 von Ueli nicht erfolgreich abgeschlossen.<span class="fa fa-close"></span></li>
+            </ol>
+          </div><!-- Task Management -->
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  </div><!-- Panel Content -->
+
+</div><!-- Main Content -->
+
+</body>
+</html>

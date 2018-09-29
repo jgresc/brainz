@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2>{{exercise.task}}</h2>
+    <div ng-if="exercise.mode === 'Video'">
+      <ng-youtube-embed url="exercise.link"></ng-youtube-embed>
+      <button class="btn btn-success" ng-click="exerciseCtrl.finishVideo()">Video angesehen</button>
+    </div>
+    <div ng-if="exercise.mode === 'Geogebra'">
+      <iframe src="{{exercise.link}}" height="405" width="600"></iframe>
+      <br>
+      <input type="text" name="studentSolution" ng-model="exerciseCtrl.studentSolution">
+      <button class="btn btn-success" ng-click="exerciseCtrl.checkWork()">Resultat prüfen</button>
+    </div>
+    <br/>
+
+    <!-- TODO Styling for feedback -->
+    <div class="widget no-color" ng-show="feedbackVisible">
+      <div ng-class="{'notify notify red-skin with-color': !isCorrect, 'notify notify sky-skin with-color': isCorrect}">
+        <div class="notify-content"><h3>{{feedbackMessage}}</h3>
+          <p></p>
+          <a title="" class="close" ng-click="exerciseCtrl.closeFeedback()">x</a></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+

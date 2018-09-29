@@ -1,0 +1,41 @@
+<div class="main-content">
+
+  <div class="panel-content">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="widget no-color">
+          <div class="services style3">
+            <span class="sky-skin"><i class="fa fa-thumbs-up"></i></span>
+            <div class="service-detail">
+              <h3>Herzlich Willkommen bei brainz21</h3>
+              <p ng-show="mainCtrl.isStudent() && !mainCtrl.isTeacher()">
+                Hoi {{
+                mainCtrl.getCurrentUser().name }} <img class="image-icon" src="../../assets/images/switzerland.png"></p>
+              <p ng-show="mainCtrl.isTeacher()">Grüezi {{mainCtrl.getCurrentUser().name }} <img class="image-icon" src="../../assets/images/switzerland.png"></p>
+              <p ng-show="!mainCtrl.isLoggedIn()"><a ui-sref="signup">Registriere
+                Dich</a> oder <a ui-sref="login">melde Dich an</a>, um loszulegen!</p></div>
+          </div><!-- Services -->
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-box">
+          <img src="../../assets/images/brainz21-welcome.png" alt=""/>
+          <div class="gallery-inner">
+            <div class="gallery-padding">
+              <div class="gallery-info">
+                <p>Der erste gemeinsamen Lehrplan für die Volksschule für die 21 deutsch- und mehrsprachigen Kantone mit die Zielsetzungen der Schule harmonisiert werden. </p>
+                <ul>
+                  <li><a href="http://www.lehrplan.ch" title=""><i class="fa fa-share"></i></a></li>
+                </ul>
+              </div><!-- Gallery Info -->
+            </div>
+          </div>
+        </div><!-- Gallery Box -->
+      </div>
+
+    </div><!-- Panel Content -->
+  </div>
+
+
+
+

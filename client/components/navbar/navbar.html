@@ -1,0 +1,48 @@
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">brainz21</a>
+    </div>
+    <div uib-collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in nav.menu" ui-sref-active="active">
+            <a ui-sref="{{item.state}}"><span class="glyphicon glyphicon-home"></span> {{item.title}}</a>
+        </li>
+        <!-- Admin specific routes here -->
+        <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin"><span class="glyphicon glyphicon-wrench"></span> Admin</a></li>
+
+        <!-- Teacher specific routes here -->
+        <li ng-show="nav.isTeacher() && !nav.isAdmin()" ui-sref-active="active"><a ui-sref="class"><span class="glyphicon glyphicon-book"></span> Klassenübersicht</a></li>
+        <li ng-show="nav.isTeacher() && !nav.isAdmin()" ui-sref-active="active"><a ui-sref="homework-editor"><span class="glyphicon glyphicon-pencil"></span> Hausaufgaben-Editor</a></li>
+
+        <!-- Student specific routes here -->
+        <li ng-show="nav.isStudent() && !nav.isTeacher()" ui-sref-active="active"><a ui-sref="infoboard"><span class="glyphicon glyphicon-stats"></span> Infoboard</a></li>
+        <li ng-show="nav.isStudent() && !nav.isTeacher()" ui-sref-active="active"><a ui-sref="homework"><span class="glyphicon glyphicon-tasks"></span> Hausaufgaben</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Logged off -->
+        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup"><span class="glyphicon glyphicon-heart"></span> Registrieren</a></li>
+        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Anmelden</a></li>
+
+        <!-- Logged in -->
+        <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span> Einstellungen</a></li>
+        <!-- Username displayed as dropdown -->
+        <li ng-show="nav.isLoggedIn()">
+          <a href="#" data-toggle="dropdown">{{ nav.getCurrentUser().name }} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profil anzeigen</a></li>
+            <li class="divider"></li>
+            <li><a ui-sref="logout" class="sign-off"><span class="glyphicon glyphicon-log-out"></span> Abmelden</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<!-- Homework selected -->
+<div ng-show="isHomeworkSelected">
+  <body>
+  <header class="side-header light-skin opened-menu">
+    <div class="admin-details">
+      <h4>{{homework.title}}</h4>
+      <h3>{{homework.subject}}</h3>
+      <i>{{homework.subCategory}}</i>
+      <br>
+      <i>Abgabe bis: {{homework.deadline | date: 'dd.MM.yyyy'}}</i>
+      <i>Punktzahl: {{homework.maxPoints}} Pkte.</i>
+    </div>
+    <div class="menu-scroll">
+      <div class="side-menus">
+        <span>AUFGABEN</span>
+        <nav>
+          <div class="widget no-color">
+            <div class="activity-feed">
+              <ul class="activity-timeline" ng-repeat="exercise in exerciseList">
+                <li>
+                  <a ui-sref=".exercise({exerciseId: exercise._id})">
+                    <span
+                      ng-class="{'user-device correct': exercise.solved, 'user-device': !exercise.solved}">
+                      <i ng-if="exercise.solved" class="fa fa-check"></i>
+                      <i ng-if="!exercise.solved" class="fa fa-circle"></i>
+                    </span>
+                  </a>
+                  <div class="user-activity">
+                    <div class="who-post-this">
+                      <div class="who-post-detail">
+                        <h4>
+                <li><a ui-sref=".exercise({exerciseId: exercise._id})">Aufgabe Nr. {{$index + 1}}</a></li>
+                <p>{{homeworkCtrl.isSolved(exercise)}} / <span>{{exercise.points}}</span> Pkte.</p>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="panel-content">
+      <div class="row">
+        <div class="col-md-12">
+          <!--FIXME ugly CSS hack for width-->
+          <div class="widget" style="width: 700px;">
+            <div class="widget-controls">
+            </div><!-- Widget Controls -->
+            <div class="welcome-bar">
+              <i class="fa fa-tasks purple-skin"></i>
+              <p>Aufgabe im Bereich</p>
+              <span>{{homework.subject}} / {{homework.subCategory}}</span>
+              <div class="row">
+                <div class="col-md-12">
+                  <div ui-view></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- Main Content -->
+  </div>
+  </body>
+</div>
+
+<!-- No homework selected -->
+<div ng-show="!isHomeworkSelected">
+  <div class="main-content">
+    <div class="panel-content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="widget">
+            <div class="widget-controls">
+            </div><!-- Widget Controls -->
+            <div class="welcome-bar">
+              <i class="fa fa-tasks purple-skin"></i>
+              <p>Keine Hausaufgabe ausgewählt</p>
+              <!-- FIXME Evtl. Liste von Homeworks hier? -->
+              <span>Gehe zum <a ui-sref="infoboard">Infoboard</a>, um dir eine Hausaufgabe zu schnappen!</span>
+              <div class="row">
+                <div class="col-md-12">
+                  <div ui-view></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- Main Content -->
+  </div>
+</div>

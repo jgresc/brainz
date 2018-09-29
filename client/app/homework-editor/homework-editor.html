@@ -1,0 +1,113 @@
+<body>
+
+<header class="side-header light-skin opened-menu">
+
+  <div class="admin-details">
+  </div>
+
+  <div class="menu-scroll">
+    <div class="side-menus">
+      <span>BEREITS ERSTELLTE HAUSAUFGABEN</span>
+      <nav>
+        <ul ng-repeat="homework in homeworkEditor.homeworkList | orderBy:'deadline'">
+          <li>
+            <a title="">
+              <i class="fa fa-flask"></i>{{homework.title}}
+              <span class="glyphicon glyphicon-remove-circle pull-right" style="color: darkred" ng-click="homeworkEditor.remove(homework)"></span>
+              <p>
+                Abgabe bis: {{homework.deadline | date: "dd.MM.yyyy"}}
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div><!-- Menu Scroll -->
+
+</header>
+
+
+<div class="main-content">
+  <div class="breadcrumbs">
+    <ul>
+      <li><a href="#" title="">Hausaufgaben-Editor</a></li>
+    </ul>
+  </div>
+
+  <div class="panel-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="widget">
+          <div class="welcome-bar">
+            <h1>Neue Hausaufgabe erstellen</h1>
+            <br/>
+            <form class="form" name="form" ng-submit="homeworkEditor.create(form)" novalidate>
+
+              <div class="form-group" ng-class="{ 'has-success': form.name.$valid && homeworkEditor.submitted,
+                                            'has-error': form.name.$invalid && homeworkEditor.submitted }">
+                <label>Name/Bezeichnung</label>
+
+                <input type="text" name="name" class="form-control" ng-model="homeworkEditor.homework.title"
+                       required/>
+              </div>
+
+              <!-- Dropdown for subjects -->
+              <div class="dropdown">
+                <label>Fach</label><br/>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownSubjects"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                  {{selectedSubject}}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-model="homework.subject">
+                  <li ng-repeat="subject in subjects"><a
+                    ng-click="homeworkEditor.selectSubject(subject)">{{subject}}</a></li>
+                </ul>
+              </div>
+              <br/>
+
+              <!-- Dropdown for subCategories -->
+              <div class="dropdown">
+                <label>Unterkategorie</label><br/>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownSubCategories"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                  {{selectedSubCategory}}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li ng-repeat="subCategory in subCategories"><a
+                    ng-click="homeworkEditor.selectSubCategory(subCategory)">{{subCategory}}</a></li>
+                </ul>
+              </div>
+              <br/>
+
+              <!-- Deadline -->
+              <div class="form-group">
+                <label>Deadline</label>
+                <input type="date" name="deadline" class="form-control" ng-model="homeworkEditor.homework.deadline"
+                       required/>
+              </div>
+
+              <h3>Verfügbare Aufgaben:</h3>
+              <div ng-repeat="exercise in homeworkEditor.generatedExerciseList | orderBy:'mode'">
+                <input type="checkbox" style="margin-right: 10px" ng-click="homeworkEditor.addOrRemoveExercise(exercise)"><span ng-class="{'glyphicon glyphicon-film': (exercise.mode === 'Video'), 'glyphicon glyphicon-tower': (exercise.mode === 'Geogebra')}"></span> {{exercise.title}}</li>
+              </div>
+              <p ng-show="homeworkEditor.generatedExerciseList.length === 0">Keine Aufgaben für die derzeitige Auswahl vorhanden</p>
+              <br/>
+              <div>
+                <button class="btn btn-inverse btn-lg btn-primary" type="submit">
+                  Hausaufgabe erstellen
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>

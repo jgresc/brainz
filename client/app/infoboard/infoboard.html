@@ -1,0 +1,141 @@
+<!doctype html>
+
+<body>
+<header class="side-header light-skin opened-menu">
+
+  <div class="admin-details">
+    <span><img src="../../assets/images/user3.png" alt=""/></span>
+    <h3>{{infoboard.getCurrentUser().name}}</h3>
+    <i>SCHÜLER</i>
+    <h5 class="admin-status online">Online</h5>
+  </div>
+
+  <div class="menu-scroll">
+    <div class="side-menus">
+      <span>AKTUELLE HAUSAUFGABEN</span>
+      <nav>
+        <ul ng-repeat="homework in infoboard.homeworkList | orderBy:'deadline'">
+          <li>
+            <a ui-sref="homework.exercise({homeworkId: homework._id, exerciseId: homework.exercises[0]})" title="">
+              <i class="fa fa-flask"></i>{{homework.title}}
+              <p>Abgabe bis: {{homework.deadline | date: "dd.MM.yyyy"}}</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div><!-- Menu Scroll -->
+
+</header>
+<div class="main-content">
+  <div class="breadcrumbs">
+    <ul>
+      <li><a href="#/" title="">Infoboard</a></li>
+    </ul>
+  </div>
+
+  <div class="heading-sec">
+    <div class="row">
+      <div class="col-md-4 column">
+        <div class="heading-profile">
+          <h2>Hoi <span>{{infoboard.getCurrentUser().name}}</span>, Willkommen zurück.</h2>
+          <span>Bist du bereit? Es gibt einiges zu tun.</span>
+        </div>
+      </div>
+    </div>
+  </div><!-- Top Bar Chart -->
+
+  <div class="panel-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="widget">
+          <div class="widget-controls">
+            <span class="close-content"><i class="fa fa-trash-o"></i></span>
+          </div><!-- Widget Controls -->
+          <div class="welcome-bar">
+            <i class="fa fa-bullhorn orange-skin"></i>
+            <p>Eine neue Hausaufgabe ist verfügbar <span>Geometrie 1</span>.</p>
+            <span>Mach dich gleich ran und hol Dir Zusatzpunkte bei dieser Hausaufgabe! <a href="#" title="">Abgabe bis: 17.07.2016!</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="widget">
+          <div class="server-status-sec">
+            <div class="server-details">
+              <span>Deine Performance</span>
+              <h3><span id="number">68%</span></h3>
+              <p>von maximal 100% richtig.</p>
+              <h5>Status : <Span>GUT</span></h5>
+            </div>
+            <div id="area-chart"></div>
+          </div>
+        </div><!-- Performance -->
+
+      </div>
+      <div class="col-md-4">
+        <div class="widget">
+          <div class="widget-controls">
+            <span class="close-content"><i class="fa fa-trash-o"></i></span>
+            <span class="expand-content"><i class="fa fa-expand"></i></span>
+            <span class="refresh-content"><i class="fa fa-refresh"></i></span>
+          </div>
+          <div class="task-managment">
+            <div class="widget-title">
+              <h3>Offene Repetitionsaufgaben</h3>
+              <span>4 Übungen sind noch offen...</span>
+            </div>
+            <ol id="listitems">
+              <li><i class="red-skin"></i>Mathematik / Geometrie Repetitionsübung 1<span class="fa fa-close"></span></li>
+              <li><i class="sky-skin"></i>Mathematik / Geometrie Repetitionsübung 2<span class="fa fa-close"></span></li>
+              <li><i class="purple-skin"></i>Mathematik / Geometrie Repetitionsübung 3<span class="fa fa-close"></span></li>
+              <li><i class="orange-skin"></i>Mathematik / Geometrie Repetitionsübung 4<span class="fa fa-close"></span></li>
+              </li>
+            </ol>
+          </div><!-- Task Management -->
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="mini-stats-sec">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="widget">
+                <div class="mini-stats ">
+                  <span class="purple-skin"><i class="fa fa-star"></i></span>
+                  <p><i class="fa  fa-arrow-up up"></i>Gelöste Aufgaben</p>
+                  <h3>{{infoboard.getCurrentUser().solvedExercises}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="widget">
+                <div class="mini-stats ">
+                  <span class="red-skin"><i class="fa fa-area-chart"></i></span>
+                  <p><i class="fa  fa-arrow-up up"></i>Gesammelte Punkte</p>
+                  <h3>{{infoboard.getCurrentUser().totalPoints}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- Mini stats Sec -->
+    </div>
+
+
+  </div>
+
+</div><!-- Panel Content -->
+
+</div><!-- Main Content -->
+
+</body>
+</html>
